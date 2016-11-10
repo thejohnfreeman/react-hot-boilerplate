@@ -4,25 +4,26 @@ var path = require('path')
 var src = path.join(__dirname, 'src')
 
 module.exports = {
-  entry: [
-    path.join(src, 'app.js'),
-  ],
+  entry: {
+    app: [path.join(src, 'app.js')],
+    vendor: ['react', 'react-dom', 'semantic-ui-react'],
+  },
   output: {
-    path: path.join(__dirname, 'public'),
+    path: 'public',
     filename: 'bundle.js',
   },
-  resolve: {root: src},
   module: {
     preLoaders: [
       {test: /\.jsx?$/, loader: 'eslint', include: src}
     ],
     loaders: [
-      {test: /\.html$/, loader: "raw-loader"},
+      {test: /\.html$/, loader: 'raw'},
       {test: /\.css$/, loaders: ['style', 'css']},
-      {test: /\.(ttf|eot|svg|woff2?|png)$/, loader: 'url?limit=8192'},
       {
         test: /\.jsx?$/,
         loaders: ['react-hot', 'babel?cacheDirectory'],
+        // Only parse files in src (i.e. not in node_modules). Alternative is
+        // to exclude node_modules.
         include: src,
       },
     ]
@@ -32,9 +33,7 @@ module.exports = {
       template: path.join(src, 'template.html'),
     }),
     new webpack.NoErrorsPlugin(),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production'),
-    }),
+    // Put vendor chunk into its own bundle.
+    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js'),
   ],
-  devServer: {host: '0.0.0.0'},
 }

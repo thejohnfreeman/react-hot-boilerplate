@@ -4,11 +4,9 @@
   "description": "",
   "repository": "https://github.com/thejohnfreeman/react-hot-boilerplate",
   "dependencies": {
-    "jquery": "^2.1.4",
     "react": "^0.14.3",
-    "react-addons-linked-state-mixin": "^0.14.3",
     "react-dom": "^0.14.3",
-    "semantic-ui-css": "^2.1.6"
+    "semantic-ui-react": "^0.60.4"
   },
   "devDependencies": {
     "babel-core": "^6.3.17",
@@ -22,6 +20,7 @@
     "eslint-plugin-react": "^3.11.3",
     "file-loader": "^0.8.5",
     "html-webpack-plugin": "^2.17.0",
+    "ignore-loader": "^0.1.1",
     "raw-loader": "^0.5.1",
     "react-hot-loader": "^1.3.0",
     "style-loader": "^0.13.0",
@@ -32,7 +31,7 @@
   "scripts": {
     "build": "webpack --progress --colors --optimize-minimize",
     "lint": "eslint src",
-    "start": "NODE_ENV=development webpack-dev-server --progress --colors --inline --hot --open",
+    "start": "webpack-dev-server --progress --colors --inline --hot --open",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "John Freeman <jfreeman08@gmail.com> (http://thejohnfreeman.com/)",
